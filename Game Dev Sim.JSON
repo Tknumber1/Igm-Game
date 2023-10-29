@@ -1,0 +1,546 @@
+ Let's make a game!
+name: Game Dev Simulator 
+by:Tknumber1
+desc:Become a legend and reach the pinnacle of fame with the ultimate idle game experience - creating the world's greatest game. Rise to the top and master the art of game development with this addictive and engaging title, sure to have you hooked for hours on end. Unleash your creativity and build your empire in the exciting world of gaming. Join the ranks of the elite and leave your mark on the industry with the best game.
+created:10/14/2023
+updated:10/16/2023
+version:2.5
+						
+
+
+Settings 
+background:https://file.garden/ZSs2KyDRyR84aPn-/Screenshot%202023-10-17%20153814.png
+stylesheet:stuff/bigBlue.css
+spritesheet:icons, 48 by 48, https://i.imgur.com/EjfvPLp.png
+
+
+
+Buildings
+*Game|UE4
+name: bigGame|Games
+desc:A Bigger Game And One Of Your Biggest Games.
+on tick:yield 1 money
+on earn:show steamPage
+on earn:show steamDlc
+on earn:show dlcCrew
+on earn:show Purchases
+on earn:show devWorker
+cost:20 money
+icon class:buildingIconSize
+Icon:https://file.garden/YYjCqvtBp0P7hcN1/Coin%20Mania/Metal%20Detector.png
+*Purchases|moneyItems
+hidden
+name: gameItems|buyableGameItems
+desc:In App Purchases MORE MONEY.
+on tick:yield 10 money
+cost:350 money
+*steamDlc
+hidden
+name:Steam DLC
+   desc:DLC FOR YOUR STEAM GAMES.
+	on tick:yield 5 money
+	on earn:yield 5 DLC   
+        cost:200 money
+		tags:<b>text</b>
+        *dlcCrew
+		hidden
+name:DLC Crew
+   desc:Makes DLC For U.
+	on tick:yield 1 DLC
+	 cost:250 money
+         *devWorker
+		 hidden
+name:Dev Worker
+   desc:A Worker That Kills Bugs For U And Makes Your Games Better Which Means More Sells.
+	on tick:yield 5 money
+	cost:200 money
+	Icon:https://file.garden/ZSs2KyDRyR84aPn-/R%20(9).png
+	tags:<i>text</i>
+	*sellPizzas
+name: Sell Pizzas
+desc:SELL YOUR PIZZAS FOR MONEY.
+on earn:yield 15 money
+cost:15 pizza
+*steamPage
+	   hidden
+	name:Steam Page
+   desc:A Steam Page For Your Games.
+on tick:yield 6 money
+	cost:100 money
+	tags:<u>Steam</u>
+	
+
+
+
+
+		
+
+
+	
+
+
+
+
+
+Resources
+*money|money
+name: Money|Money
+desc:Use This To Buy Super Important Things.
+Icon:https://file.garden/ZSs2KyDRyR84aPn-/Lovepik_com-401492960-money-fund-icon-free-vector-illustration-material.png
+class:noBackground
+text:You have [?(this=0)|no money|[this] dollars]
+*DLC|DLC
+name: DLC|DLC
+desc:Use This To Put DLC In Your Game.
+Icon:https://file.garden/ZSs2KyDRyR84aPn-/bitcoin-wallet-coins.svg
+class:noBackground
+*pizza|pizzas
+name: pizza|pizzas
+desc: Some Tasty Pizza For Your Restuarant (MUST OWN THE Restuarant UPGRADE)
+icon:https://i.imgur.com/jLsA6mR.png 
+class:noBackground
+*goldenDev
+		name:Golden Dev
+		desc:A Dev But Golden And BETTER.
+		icon:icons[1,0]
+		class:noBackground
+		*click
+name:Clicks
+desc: CLICKS
+class:noBackground
+text:You have [?(this=0)|have no clicks|[this] clicks]
+
+
+
+
+
+Buttons
+*gameEngine
+desc:Gives You Games Ideas And U Make The UE4 Games.
+	on click:yield 1 money 
+	on click:yield 1 click
+	class:bigButton hasFlares
+	Icon:https://file.garden/ZOyPbvz9mjPzmzQr/gaem/web-development-svgrepo-com.png	
+	
+	
+
+
+
+Upgrades
+*ue5
+name:Ue5
+   desc:Use UE5 And Not UE4 For Better Games.
+	passive:multiply yield of Game by 10
+	cost:350 money
+	on earn:hide this
+	*ue6
+name:Ue6
+   desc:Use UE6 And Not UE5 For Even Better Games With Even More Realstic Graphics.
+	passive:multiply yield of Game by 10
+	cost:560 money
+	on earn:hide this
+	*dlcAddon
+name:DLC Addon
+   desc:Your First DLC Addon.
+	passive:multiply yield of Game by 10
+        passive:multiply yield of dlcCrew by 10
+	on earn:hide this
+        cost:10 DLC
+	*gameRestuarant
+name: Game Restuarant
+   desc:A Restuarant For Your Games.
+	on earn:hide this
+	on earn:show pizzaCrew
+	on tick:yield 1 pizza
+        cost:10000 money
+	icon:https://i.imgur.com/jLsA6mR.png
+	  *pizzaCrew
+	   hidden
+	name:Pizza Crew
+   desc:Workers That Cook PIzza For U.
+	on earn:hide this
+	on tick:yield 10 pizza
+        cost:12000 money
+	icon:https://i.imgur.com/jLsA6mR.png
+	*Company
+name: Company
+   desc:GET A COMPANY.
+	on earn:hide this
+	on tick:yield 1 pizza
+	on tick:yield 100 money
+        cost:25000000 money
+		*dlcUse
+name:DLC Use
+   desc:Use Your DLC.
+	passive:multiply yield of Game by 10
+	on earn:hide this
+        cost:10 DLC
+		*nividaGpu
+name:Nivida Gpu
+   desc:Use The Nivida Gpu To Use Shadowplay And Have A Better Gpu Also.
+	cost:6500 money
+	on earn:hide this
+	on earn:show nividaRtx
+	*nividaRtx
+	hidden
+name:Nivida RTX
+   desc:Use The Nivida RTX To Use RTX On Your Games And Have A Better RTX Also.
+	cost:150000 money
+	on earn:hide this
+	on earn:show shadowPlay
+	*shadowPlay
+	hidden
+name:ShadowPlay
+   desc:Use ShadowPlay To Record EPIC TRAILERS FOR YO GAMES.
+	 passive:multiply yield of Trailers by 10
+	on earn:hide this
+	*Trailers
+name:Game Trailer
+   desc:Make Trailers For Your Game.
+	on tick:yield 15 money
+	cost:650 money
+	on earn:hide this
+	
+	
+// 518 Lines Of Code
+		
+
+
+
+Achievements
+	*trueDev
+name:True Dev
+desc:MAKE 10 GAMES WOWIE
+req:10 gameEngine clicks
+*richBoi
+name:Rich Boi
+desc:make 1k money
+req:1000 money:earned
+*moneyBoi
+name:Money Boi
+desc:make 10k money
+req:10000 money:earned
+*gameMaker
+name:Game Maker
+desc:make 100 games.
+req:100 gameEngine clicks
+*firstGame
+name:First Game
+desc:make 1 Game.
+req:1 gameEngine clicks
+*firstMoney
+name:First Money
+desc:make 1 Dolla.
+req:1 money:earned
+*daniDev
+name:Dani Dev
+desc:Buy A Steam Page.
+req:1 steamPage
+*brogotDLC
+name:Bro Got DLC
+desc:GET DLC.
+req:1 DLC
+*Broke
+name:Broke
+desc:Have 0 Money.
+req:0 money:earned
+*firstDlc
+name:Dani's DLC
+desc:Buy The DLC Addon Upgrade.
+req:1 dlcAddon
+*yourownRestuarant
+name:Your Own Restuarant
+desc:Buy The Restuarant Upgrade.
+req:1 gameRestuarant
+icon:https://i.imgur.com/jLsA6mR.png
+*firstHire
+name:Your First Hirre
+desc:buy the worker.
+req:1 devWorker
+*secondHire
+name:Your Second Hirre
+desc:buy the pizza crew.
+req:1 pizzaCrew
+*Coder
+name:Coder
+desc:518 Lines Of Code <b>*Click 120 Times*</b>
+req:120 gameEngine clicks
+
+
+
+
+
+
+CSS
+#game.filtersOn
+{
+    background-size: 100% 100%;
+    image-rendering: pixelated;
+	font-family:"Times New Roman",Times,serif;
+    color:white;
+}
+
+
+.buildingIconSize
+{
+    height:64px;
+    width:64;
+    
+}
+
+CSS
+  #game.filtersOn .thing.cantAfford.notOwned
+  {
+    filter:blur(3px);
+  }
+  
+  
+  
+  
+ CSS
+ #game.filtersOn .thing
+  {
+    border-radius:8px;
+  }
+  
+  
+CSS
+  #game.filtersOn.thing
+  {
+    text-shadow:1px 1px 3 black;
+  }
+
+
+
+
+
+
+
+Shinies
+*Dev
+movement:anywhere pulse fade grow
+		frequency:25
+		icon:https://file.garden/ZSs2KyDRyR84aPn-/dev.png
+		class:bigButton hasFlares
+		on click:yield 1 goldenDev
+		
+		
+		
+		
+		
+CSS
+{
+ #game
+{
+	background:#fff;
+	font-size:12px;
+	color:rgba(0,0,0,0.9);
+	text-shadow:none;
+}
+
+
+.box
+{
+	text-align:center;
+	padding:0px;
+	box-shadow:none;
+}
+.thing,.box-header,.box-footer,.box-bit
+{
+	background:rgba(255,255,255,0.5);
+	border:1px solid rgba(0,0,0,0.9);
+	margin:1px;
+}
+.thing:hover
+{
+	background:rgba(255,255,255,0.75);
+}
+
+.box-header
+{
+	margin-bottom:4px;
+}
+.box-footer
+{
+	margin-top:4px;
+}
+
+.title
+{
+	text-decoration:underline;
+}
+
+#box-main
+{
+	left:0px;
+	top:0px;
+	bottom:0px;
+	overflow:hidden;
+	width:60%;
+	position:absolute;
+}
+#box-res.fullWidth
+{
+	width:100%;
+	top:5%;
+	height:5%;
+	min-height:32px;
+	z-index:100;
+	position:absolute;
+}
+#box-buttons
+{
+	top:0px;
+	right:0px;
+	bottom:0px;
+	left:0px;
+	position:absolute;
+}
+#box-store
+{
+	right:0px;
+	top:0px;
+	bottom:0px;
+	width:40%;
+	position:absolute;
+}
+#box-buildings,#box-upgrades
+{
+	top:0px;
+	bottom:0px;
+	width:50%;
+	right:0%;
+	overflow-x:hidden;
+	overflow-y:scroll;
+	padding-bottom:48px;/* this is to accommodate the info and settings buttons */
+	position:absolute;
+}
+#box-buildings
+{right:50%;}
+
+#box-buildings>.box-header
+{
+	padding-bottom:16px;
+}
+#bulkDisplay
+{
+	margin:-20px 24px 6px 24px;
+	border:none;
+	background:transparent;
+}
+
+
+.thing
+{
+	display:inline-block;
+	padding:0px;
+	cursor:pointer;
+}
+.thing:active
+{
+	opacity:0.5;
+}
+.upgrade.owned,.achiev.owned
+{
+	box-shadow:0px 0px 0px 2px rgba(0,0,0,0.5) inset;
+}
+.thing.cantAfford
+{
+	opacity:0.65;
+}
+.upgrade.cantAfford
+{
+	border:none;
+}
+
+.thing-costs{font-weight:bold;text-shadow:1px 1px 0px rgba(0,0,0,0.5);}
+.cost.hasEnough{color:#0f0;}
+.cost.notEnough{color:#f00;}
+
+
+.button>.thing-text
+{
+	text-decoration:underline;
+}
+
+.building
+{
+	display:block;
+	margin-right:0px;
+	font-size:14px;
+}
+
+.fullWidth
+{
+	display:block;
+	margin-left:0px;
+	margin-right:0px;
+	z-index:10;
+}
+#game .fullWidth
+{
+	height:auto;
+	min-height:auto;
+}
+.fullWidth,.fullWidth:hover
+{
+	background:rgba(0,0,0,0.75);
+	box-shadow:none;
+	color:#fff;
+}
+.fullWidth:before,.fullWidth:after
+{
+	content:'';
+	height:1px;
+	background:rgba(255,255,255,0.75);
+	position:absolute;
+	left:0px;
+	right:0px;
+	z-index:-1;
+}
+.fullWidth:before{top:-1px;}
+.fullWidth:after{bottom:-1px;}
+
+.fullWidth .thing-icon
+{
+	margin-top:-10px;
+	margin-bottom:-10px;
+}
+.fullWidth .thing-text
+{
+	margin-top:-4px;
+	margin-bottom:-4px;
+}
+
+.listing
+{
+	font-weight:normal;
+}
+
+#game.filtersOn .thing-icon{filter:drop-shadow(3px 3px 1px rgba(0,0,0,0.5));}
+   
+}
+
+
+
+
+
+		
+		
+
+
+
+
+
+
+
+
+
+
+
+       
+
+    
+
+
+	
